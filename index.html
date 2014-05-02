@@ -13,8 +13,8 @@
   <script type="text/x-handlebars">
     <div class="navbar">
       <div class="navbar-inner">
-        <a class="brand" href="http://www.tumblr.com/docs/en/api/v2">Tumblr</a>
-        <ul class="nav">
+        <a class="brand" href="#">Tumblr</a>
+        <ul class="nav pull-right">
           <li>{{#link-to 'posts'}}Posts{{/link-to}}</li>
           <li>{{#link-to 'about'}}About{{/link-to}}</li>
         </ul>
@@ -36,7 +36,7 @@
             </thead>
             {{#each model}}
             <tr><td>
-                {{#link-to 'post' this}}{{title}} <small class='muted'>by {{author.name}}</small>{{/link-to}}
+                {{#link-to 'post' this}}{{title}} {{/link-to}}
             </td></tr>
             {{/each}}
           </table>
@@ -52,7 +52,7 @@
   <!-- Single Post Template -->
   <script type="text/x-handlebars" id="post">
     <h1>{{title}}</h1>
-    <h2> by <small class='muted'>({{format-timestamp timestamp}})</small></h2>
+    <h2> <small class='muted'>{{format-timestamp timestamp}}</small></h2>
 
     <hr>
 

@@ -49,6 +49,24 @@ App.PostController = Ember.ObjectController.extend({
     console.log(this.get('title'));
     console.log(this.get('id'));
     console.log(this.get('body'));
+
+    /*
+     // does not work due to same origin policy (http://en.wikipedia.org/wiki/Same_origin_policy}
+    $.ajax({
+      type: 'POST', 
+      url: 'http://api.tumblr.com/v2/blog/puru-prakash.tumblr.com/post/edit',
+      data: { 
+        'id': this.get('id'),
+        'type': 'text',
+        'title': this.get('title'), 
+        'body': this.get('body'),
+        'api_key': 'JOVD2WEweNIi3KL3id2xwx43kPAJN4MAbvSBhvPOjIf4y028As'
+      },
+      success: function(msg){
+        alert('Success: ' + msg);
+      }
+    });
+    */
   }
 });
 

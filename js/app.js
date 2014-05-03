@@ -9,53 +9,15 @@ App.Router.map(function() {
 });
 
 
-// Return model
-/*
-App.PostsRoute = Ember.Route.extend({
-  model: function() {
-    return posts;
-  }
-});
-*/
-
-/*
-App.PostsRoute = Ember.Route.extend({
-  model: function() {
-    return App.TumblrPosts.findAll();
-  }
-});
-
-App.TumblrPosts = Ember.Object.extend({});  //create a blank class
-App.TumblrPosts.reopenClass({  //add a class method 'findAll' to the new class
-    findAll: function() {
-        posts = [];        
-        $.ajax({ //use jquery to get the json from the api
-            method: 'get',
-            url: "http://api.tumblr.com/v2/blog/puru-prakash.tumblr.com/posts/text?api_key=JOVD2WEweNIi3KL3id2xwx43kPAJN4MAbvSBhvPOjIf4y028As",
-            dataType: 'jsonp', //use jsonp because of the same domain limitation
-            success: function(response) {
-                console.log("success");
-                response.response.posts.forEach(function (child) {
-                        posts.pushObject(App.TumblrPosts.create(child));
-                        //console.log(child);
-                });            
-            }        
-        });
-        console.log('Retrieved All posts');
-        //console.log(posts); //see that we instaniated the new objects from the GuardianLink class
-        return posts;     
-    }
-});
-*/
 
 
 App.PostsRoute = Ember.Route.extend({
   model: function(params) {
-    console.log("Getting All Posts");
+    //console.log("Getting All Posts");
     return Ember.$.getJSON('http://api.tumblr.com/v2/blog/puru-prakash.tumblr.com/posts/text?api_key=JOVD2WEweNIi3KL3id2xwx43kPAJN4MAbvSBhvPOjIf4y028As&callback=?').then(function(data) {
       posts = data.response.posts;
-      console.log(posts);
-      console.log("Finished All Posts");
+      //console.log(posts);
+      //console.log("Finished All Posts");
       return posts;
     });
   }
@@ -64,38 +26,29 @@ App.PostsRoute = Ember.Route.extend({
 
 App.PostRoute = Ember.Route.extend({
   model: function(params) {
-    console.log("Getting Single Post");
-    console.log(params.post_id);
-    console.log(posts);
+    //console.log("Getting Single Post");
+    //console.log(params.post_id);
+    //console.log(posts);
     var output = posts.findBy('id', parseInt(params.post_id));
-    console.log(output)
-    console.log("Finished Single Post");
+    //console.log(output)
+    //console.log("Finished Single Post");
     return output;
   }
 });
 
-/*
-App.PostRoute = Ember.Route.extend({
-  model: function(params) {
-    console.log("Getting Single Post");
-    console.log(params.post_id);
-    return Ember.$.getJSON('http://api.tumblr.com/v2/blog/puru-prakash.tumblr.com/posts?id='+params.post_id+'api_key=JOVD2WEweNIi3KL3id2xwx43kPAJN4MAbvSBhvPOjIf4y028As&callback=?').then(function(data) {
-      console.log(data);
-      return data.response.posts;
-    });
-  }
-});
-*/
+App.PostController = Ember.ObjectController.extend({
+  isEditing: false,
 
-/*
-App.AboutRoute = Ember.Route.extend({
-  model: function() {
-    return Ember.$.getJSON('http://api.tumblr.com/v2/blog/puru-prakash.tumblr.com/info?api_key=JOVD2WEweNIi3KL3id2xwx43kPAJN4MAbvSBhvPOjIf4y028As&callback=?').then(function(data) {
-      return data;
-    });
+  edit: function() {
+    this.set('isEditing', true);
+  },
+
+  doneEditing: function() {
+    this.set('isEditing', false);
+    this.get('store').commit();
   }
 });
-*/
+
 
 App.AboutRoute = Ember.Route.extend({
   model: function() {
@@ -112,6 +65,10 @@ Ember.Handlebars.helper('format-date', function(date) {
 
 Ember.Handlebars.helper('format-timestamp', function(ts) {
   return moment.unix(ts).fromNow();
+});
+
+Ember.Handlebars.helper('format-ts', function(ts) {
+  return moment.unix(ts).format('MMMM Do YYYY, h:mm:ss a');
 });
 
 var consumerkey = "JOVD2WEweNIi3KL3id2xwx43kPAJN4MAbvSBhvPOjIf4y028As";

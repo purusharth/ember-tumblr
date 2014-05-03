@@ -51,6 +51,13 @@
 
   <!-- Single Post Template -->
   <script type="text/x-handlebars" id="post">
+    {{#if isEditing}}
+      {{partial 'post/edit'}}
+      <button {{action 'doneEditing'}}>Done</button>
+    {{else}}
+      <button {{action 'edit'}}>Edit</button>
+    {{/if}}
+
     <h1>{{title}}</h1>
     <h2> <small class='muted'>{{format-timestamp timestamp}}</small></h2>
 
@@ -66,7 +73,12 @@
   <!-- About Template -->
   <script type="text/x-handlebars" id="about">
     <div class='about'>
-      <p> {{model.response.blog.title}} </p>
+      <h3> {{model.response.blog.title}} </h3>
+      <b>Description:</b> {{model.response.blog.description}} <br/>
+      <b>URL:</b> <a href="#"> {{model.response.blog.url}} </a><br/>
+      <b>Last Updated:</b> {{format-ts model.response.blog.updated}} <br/>
+      <b>Number of Posts:</b> {{model.response.blog.posts}} <br/>
+
       {{outlet}}
     </div>
   </script>

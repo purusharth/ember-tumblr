@@ -8,12 +8,12 @@ session_start();
 require_once('tumblroauth/tumblroauth.php');
 
 // Define the needed keys
-$consumer_key = "YOUR CONSUMER KEY GOES HERE";
-$consumer_secret = "PUT THE SECRET KEY HERE";
+$consumer_key = "JOVD2WEweNIi3KL3id2xwx43kPAJN4MAbvSBhvPOjIf4y028As";
+$consumer_secret = "yzPEeg2lOJvYHPmfvJOA5Jmy2knPCYpZyXBxW7VReDlGewkmTE";
 
 // The callback URL is the script that gets called after the user authenticates with tumblr
 // In this example, it would be the included callback.php
-$callback_url = "PUT A CALLBACK URL HERE";
+$callback_url = "http://userpages.umbc.edu/~puru1/ember-tumblr/callback.php";
 
 // Let's begin.  First we need a Request Token.  The request token is required to send the user
 // to Tumblr's login page.

@@ -4,8 +4,8 @@ session_start();
 require_once('tumblroauth/tumblroauth.php');
 
 // Define the needed keys
-$consumer_key = "YOUR CONSUMER KEY GOES HERE";
-$consumer_secret = "PUT THE SECRET KEY HERE";
+$consumer_key = "JOVD2WEweNIi3KL3id2xwx43kPAJN4MAbvSBhvPOjIf4y028As";
+$consumer_secret = "yzPEeg2lOJvYHPmfvJOA5Jmy2knPCYpZyXBxW7VReDlGewkmTE";
 
 // Once the user approves your app at Tumblr, they are sent back to this script.
 // This script is passed two parameters in the URL, oauth_token (our Request Token)

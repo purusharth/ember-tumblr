@@ -45,7 +45,10 @@ App.PostController = Ember.ObjectController.extend({
 
   doneEditing: function() {
     this.set('isEditing', false);
-    this.get('store').commit();
+    //this.get('store').commit();
+    console.log(this.get('title'));
+    console.log(this.get('id'));
+    console.log(this.get('body'));
   }
 });
 
